@@ -19,7 +19,7 @@ import {CommonModule} from '@angular/common';
 export class TagsComponent {
   loaded: boolean = false;
   tags: Tag[] = [];
-  nextId: number = 4; //car certaines donner par default
+
   editing: Tag | null = null;
 
 
@@ -38,27 +38,26 @@ export class TagsComponent {
     this.tags = this.serviceStorage.getAllTag();
   }
 
-  dialogAddTag() {
-    const tagName = window.prompt('Entrez le nom du nouveau tag :');
-
-    if (tagName && tagName.trim() !== '') {
-      const newTag: Tag = {
-        name: tagName.trim(),
-        color: 'blue',
-        id: this.nextId++
-      };
-
-      //this.tags.push(newTag);
-      this.serviceStorage.saveTag(newTag);
-    }
-    return false;
-  }
+  // dialogAddTag() {
+  //   const tagName = window.prompt('Entrez le nom du nouveau tag :');
+  //
+  //   if (tagName && tagName.trim() !== '') {
+  //     const newTag: Tag = {
+  //       name: tagName.trim(),
+  //       color: 'blue',
+  //       id: this.nextId++
+  //     };
+  //
+  //     //this.tags.push(newTag);
+  //     this.serviceStorage.saveTag(newTag);
+  //   }
+  //   return false;
+  // }
 
   deleteTag(tag: Tag) {
     this.serviceStorage.deleteTag(tag);
     //nouveau affichage
     this.tags = this.tags.filter(t => t.id !== tag.id);
-
 
   }
 

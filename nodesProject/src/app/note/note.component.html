@@ -1,10 +1,9 @@
-<div class="note-card" [style.background-color]="color">
-  <h3>{{ title }}</h3>
+<div class="note" [style.background-color]="color">
+  <h2>{{ title }}</h2>
+
   <p>{{ content }}</p>
-  <div class="tags" *ngIf="tags && tags?.length > 0">
-    <span *ngFor="let tag of tags" class="tag-pill">
-      {{ tag.name }}
-    </span>
+
+  <div class="tags">
+    <span *ngFor="let tag of tags" class="tag">{{ tag.name }}</span>
   </div>
 </div>
-

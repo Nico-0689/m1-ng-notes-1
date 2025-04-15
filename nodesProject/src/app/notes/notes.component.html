@@ -5,6 +5,7 @@
   <ul>
     @for (note of notes; track note.id) {
       <li>
+         <span (dblclick)="editNote(note)">
         <app-note
           [id]="note.id"
           [title]="note.title"
@@ -12,16 +13,33 @@
           [color]="note.color"
           [tags]="note.tags || []"
         ></app-note>
+           </span>
 
       </li>
     } @empty {
       <li>Aucune note !</li>
     }
   </ul>
+  <a href="#" (click)="startEditing(); $event.preventDefault()">Ajouter une nouvelle Note</a>
+
 </div>
 
 
+@if (editing) {
+  <form (ngSubmit)="submitForm()">
+    <label for="title">Titre :</label>
+    <input type="text" id="title" name="title" [(ngModel)]="editing.title" required />
+    <label for="title">Contenu :</label>
 
+    <input type="text" id="content" name="content" [(ngModel)]="editing.content" required />
+
+    <label for="color">Couleur :</label>
+    <input type="color" id="color" name="color" [(ngModel)]="editing.color" required />
+
+    <button type="submit">Valider</button>
+    <button type="button" (click)="cancelEdit()">Annuler</button>
+  </form>
+}
 
 <!--<div class="notes-app">-->
 <!--  &lt;!&ndash; Barre de recherche filtre &ndash;&gt;-->

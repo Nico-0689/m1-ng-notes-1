@@ -63,16 +63,19 @@ export class StorageService {
 
   addNote(note: Note): void {
     this.notes.push(note);
+    console.log("taille "+this.notes.length)
   }
 
   deleteNote(id: number): void {
     this.notes = this.notes.filter(note => note.id !== id);
   }
 
-  updateNote(updatedNote: Note): void {
-    const index = this.notes.findIndex(note => note.id === updatedNote.id);
-    if (index !== -1) {
-      this.notes[index] = updatedNote;
+  updateNote(updatedNote: Note | null): void {
+    if (updatedNote!=null){
+      const index = this.notes.findIndex(note => note.id === updatedNote.id);
+      if (index !== -1) {
+        this.notes[index] = updatedNote;
+      }
     }
   }
 }
