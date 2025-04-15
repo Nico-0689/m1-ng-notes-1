@@ -5,6 +5,6 @@ export type Note = {
   'color':string,
   'title':string,
   'id':number,
-  'tag':Tag[]| null
+  'tags':Tag[]| null
 
 }
