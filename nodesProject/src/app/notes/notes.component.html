@@ -1,0 +1,97 @@
+
+
+<div class="notes-container">
+  <h2>Mes Notes</h2>
+  <ul>
+    @for (note of notes; track note.id) {
+      <li>
+        <app-note
+          [id]="note.id"
+          [title]="note.title"
+          [content]="note.content"
+          [color]="note.color"
+          [tags]="note.tags || []"
+        ></app-note>
+
+      </li>
+    } @empty {
+      <li>Aucune note !</li>
+    }
+  </ul>
+</div>
+
+
+
+
+<!--<div class="notes-app">-->
+<!--  &lt;!&ndash; Barre de recherche filtre &ndash;&gt;-->
+<!--  <div class="filters-container">-->
+<!--    <div class="search-bar">-->
+<!--      <input-->
+<!--        type="text"-->
+<!--        [(ngModel)]="searchTerm"-->
+<!--        placeholder="Rechercher des notes..."-->
+<!--        (input)="search()"-->
+<!--      >-->
+<!--      <button (click)="search()">🔍</button>-->
+<!--    </div>-->
+
+<!--    <div class="tag-filters">-->
+<!--      @for (tag of availableTags; track tag.id) {-->
+<!--        <div-->
+<!--          class="tag-filter"-->
+<!--          [class.active]="selectedTagIds.includes(tag.id)"-->
+<!--          (click)="toggleTagFilter(tag.id)"-->
+<!--        >-->
+<!--          {{ tag.name }}-->
+<!--        </div>-->
+<!--      }-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Formulaire de création/édition de note &ndash;&gt;-->
+<!--  @if (isCreatingNote || editingNote) {-->
+<!--    <div class="note-editor">-->
+<!--      <h2>{{ isCreatingNote ? 'Créer une nouvelle note' : 'Éditer une note' }}</h2>-->
+<!--      <app-note-->
+<!--        [id]="isCreatingNote ? 0 : (editingNote?.id || 0)"-->
+<!--        [(title)]="isCreatingNote ? newNote.title : (editingNote?.title || '')"-->
+<!--        [(content)]="isCreatingNote ? newNote.content : (editingNote?.content || '')"-->
+<!--        [(checklistItems)]="isCreatingNote ? newNote.checklistItems : (editingNote?.checklistItems || [])"-->
+<!--        [(type)]="isCreatingNote ? newNote.type : (editingNote?.type || 'text')"-->
+<!--        [(color)]="isCreatingNote ? newNote.color : (editingNote?.color || 'yellow')"-->
+<!--        [(tags)]="isCreatingNote ? newNote.tags : (editingNote?.tags || [])"-->
+<!--        [isEditing]="true"-->
+<!--        (noteSave)="saveNote($event)"-->
+<!--      ></app-note>-->
+<!--      <div class="editor-actions">-->
+<!--        <button class="btn btn-secondary" (click)="isCreatingNote = false; editingNote = null">Annuler</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  } @else {-->
+<!--    &lt;!&ndash; Liste des notes &ndash;&gt;-->
+<!--    <div class="notes-container">-->
+<!--      @if (filteredNotes.length > 0) {-->
+<!--        @for (note of filteredNotes; track note.id) {-->
+<!--          <app-note-->
+<!--            [id]="note.id"-->
+<!--            [title]="note.title"-->
+<!--            [content]="note.content"-->
+<!--            [checklistItems]="note.checklistItems"-->
+<!--            [type]="note.type"-->
+<!--            [color]="note.color"-->
+<!--            [tags]="note.tags"-->
+<!--            (noteClick)="editNote($event)"-->
+<!--            (noteDelete)="deleteNote($event)"-->
+<!--          ></app-note>-->
+<!--        }-->
+<!--      } @else {-->
+<!--        <div class="no-notes">-->
+<!--          <p>Aucune note trouvée</p>-->
+<!--          <button class="btn btn-primary" (click)="createNewNote()">Créer votre première note</button>-->
+<!--        </div>-->
+<!--      }-->
+<!--    </div>-->
+<!--  }-->
+<!--</div>-->
+

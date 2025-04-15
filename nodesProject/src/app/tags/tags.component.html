@@ -1,0 +1,46 @@
+<ul>
+  @for (tag of tags; track $index) {
+    <li>
+      <span (dblclick)="editTag(tag)">
+        <app-tag [id]="tag.id" [name]="tag.name" [color]="tag.color"></app-tag>
+
+        <button (click)="deleteTag(tag)">Supprimer</button>
+         </span>
+
+    </li>
+  } @empty {
+    <li>Aucun tag !</li>
+  }
+</ul>
+
+<a href="#" (click)="startEditing(); $event.preventDefault()">Ajouter une nouvelle étiquette</a>
+
+
+@if (editing) {
+  <form (ngSubmit)="submitForm()">
+    <label for="name">Nom :</label>
+    <input type="text" id="name" name="name" [(ngModel)]="editing.name" required />
+
+    <label for="color">Couleur :</label>
+    <input type="color" id="color" name="color" [(ngModel)]="editing.color" required />
+
+    <button type="submit">Valider</button>
+    <button type="button" (click)="cancelEdit()">Annuler</button>
+  </form>
+}
+
+
+
+<!--<ul>-->
+<!--  @for(tag of tags; track $index) {-->
+<!--    <li>-->
+<!--      {{ tag.name }}-->
+<!--      <button (click)="deleteTag(tag)">Supprimer</button>-->
+<!--    </li>-->
+<!--  } @empty {-->
+<!--    <li>Aucun tag !</li>-->
+<!--  }-->
+<!--</ul>-->
+
+<!--<a href="#" (click)="dialogAddTag()">Ajouter</a>-->
+

@@ -35,7 +35,7 @@ Créez donc une interface "note" via cette commande.
 > La bonne pratique veut que les fichiers de modèles soient nommés ".model.ts", ce qui se fait via l'argument `--type=model` dans le `ng g i`.
 
 ### Création de l'entité "à la main"
-Créez un fichier `tag.ts` dans le composant racine. Ce fichier contiendra le modèle, sous forme de `type` cette fois, de votre tag.
+Créez un fichier `Tag.ts` dans le composant racine. Ce fichier contiendra le modèle, sous forme de `type` cette fois, de votre tag.
 Un rappel de comment créer un type en TS :
 
 ```ts
