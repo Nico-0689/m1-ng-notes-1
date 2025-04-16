@@ -1,7 +1,11 @@
 
-
+<!-- Search bar -->
+<div class="search-container">
+  <input type="text" class="search-input" placeholder="Rechercher des notes..." [(ngModel)]="searchTerm" (input)="filterNotes()">
+</div>
 <div class="notes-container">
-  <h2>Mes Notes</h2>
+  <h2>Mes Notes:</h2>
+  <span>Double clique sur une Note permet l'édition</span>
   <ul>
     @for (note of notes; track note.id) {
       <li>
@@ -24,20 +28,29 @@
 
 </div>
 
-
+//Ajout de checkbox pour les tags
 @if (editing) {
   <form (ngSubmit)="submitForm()">
     <label for="title">Titre :</label>
     <input type="text" id="title" name="title" [(ngModel)]="editing.title" required />
-    <label for="title">Contenu :</label>
-
+    <label for="content">Contenu :</label>
     <input type="text" id="content" name="content" [(ngModel)]="editing.content" required />
-
     <label for="color">Couleur :</label>
     <input type="color" id="color" name="color" [(ngModel)]="editing.color" required />
-
-    <button type="submit">Valider</button>
-    <button type="button" (click)="cancelEdit()">Annuler</button>
+    <label class="note-card">Tags :</label>
+    <div *ngFor="let tag of allTags">
+      <label>
+        <input
+          type="checkbox"
+          [value]="tag.name"
+          [checked]="isTagSelected(tag)"
+          (change)="toggleTag(tag, $event)"
+        />
+        {{ tag.name }}
+      </label>
+    </div>
+    <button type="submit" class="btn-secondary">Valider</button>
+    <button type="button" class="btn-secondary" (click)="cancelEdit()">Annuler</button>
   </form>
 }
 

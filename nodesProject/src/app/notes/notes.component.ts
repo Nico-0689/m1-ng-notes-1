@@ -17,12 +17,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 export class NotesComponent implements OnInit {
   notes: Note[] = [];
   editing: Note | null = null;
+  allTags:Tag[]=[];
 
   constructor(private storageService: StorageService) {
   }
 
   ngOnInit(): void {
     this.loadNotes();
+    this.getAllTags();
   }
 
   loadNotes(): void {
@@ -59,4 +61,35 @@ export class NotesComponent implements OnInit {
     this.editing = {id: 0, content: '', color: '', title: '', tags: []};
   }
 
+  getAllTags(){
+    this.allTags=this.storageService.getAllTag();
+  }
+  searchTerm: any;
+
+  isTagSelected(tag: Tag): boolean {
+    if (!this.editing) return false;
+    // @ts-ignore
+    return this.editing.tags.some(t => t.name === tag.name);
+  }
+
+  toggleTag(tag: Tag, event: any): void {
+    if (!this.editing) return;
+
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+      if (!this.isTagSelected(tag)) {
+        // @ts-ignore
+        this.editing.tags.push(tag);
+      }
+    } else {
+      // @ts-ignore
+      this.editing.tags = this.editing.tags.filter(t => t.name !== tag.name);
+    }
+  }
+
+
+  filterNotes() {
+
+  }
 }
